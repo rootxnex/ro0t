@@ -1,0 +1,24 @@
+[
+  {
+    "scan_id": "demo-scan-001",
+    "timestamp": "2024-01-15T10:30:00",
+    "filename": "example_application.py",
+    "vulnerabilities": [
+      {
+        "vuln_id": "VULN-001",
+        "severity": "High",
+        "description": "SQL Injection vulnerability in user authentication module. Attackers can bypass login and gain unauthorized access to sensitive data.",
+        "cve_id": "CVE-2024-1234",
+        "affected_component": "auth/login.php"
+      },
+      {
+        "vuln_id": "VULN-002",
+        "severity": "Medium",
+        "description": "Cross-Site Scripting (XSS) vulnerability in comment system. Malicious scripts can be injected and executed in user browsers.",
+        "cve_id": "CVE-2024-5678",
+        "affected_component": "comments/display.php"
+      }
+    ],
+    "total_vulnerabilities": 2
+  }
+] 

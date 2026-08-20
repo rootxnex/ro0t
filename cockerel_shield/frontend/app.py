@@ -17,12 +17,23 @@ from cshield.uploads import UploadError, UploadedSource, scan_uploads
 st.set_page_config(page_title="Cockerel Shield", page_icon="🛡️", layout="wide")
 st.markdown("""
 <style>
-.stApp {background:#08111f} [data-testid="stSidebar"] {background:#0d1a2b}
-.hero {padding:2rem;border:1px solid #1e3a5f;border-radius:18px;background:linear-gradient(135deg,#0d1a2b,#102942);margin-bottom:1.5rem}
-.hero h1 {margin:0;color:#f8fafc}.hero p {color:#a8c0dc;margin:.55rem 0 0;max-width:760px}
-.badge {display:inline-block;color:#5eead4;background:#0f3b40;border:1px solid #17626a;border-radius:999px;padding:.2rem .65rem;margin-bottom:.8rem;font-size:.82rem}
-[data-testid="stMetric"] {background:#0d1a2b;border:1px solid #1e3a5f;padding:1rem;border-radius:14px}
-.footer {color:#6f89a5;text-align:center;padding:2rem 0 1rem}
+:root {--surface:#172235;--light:#22324c;--dark:#0a111d;--mint:#5eead4;--ink:#edf6ff;--muted:#9cb0c8}
+.stApp {background:linear-gradient(145deg,#111c2d,#17253a);color:var(--ink)}
+[data-testid="stSidebar"] {background:#142033;border-right:0;box-shadow:8px 0 22px #0a111d99}
+.block-container {max-width:1180px;padding-top:2.4rem}
+.hero {padding:2.6rem;border:0;border-radius:28px;background:linear-gradient(145deg,#1a2940,#121d30);box-shadow:14px 14px 30px #09111ecc,-10px -10px 24px #263b5d88;margin-bottom:2.2rem}
+.hero h1 {margin:0;color:var(--ink);font-size:clamp(2.25rem,5vw,4rem);line-height:1.05;letter-spacing:-.04em}
+.hero p {color:var(--muted);margin:.9rem 0 0;max-width:720px;font-size:1.08rem;line-height:1.7}
+.badge {display:inline-block;color:var(--mint);background:#142538;border-radius:999px;padding:.38rem .85rem;margin-bottom:1.1rem;font-size:.76rem;font-weight:700;letter-spacing:.08em;box-shadow:inset 3px 3px 7px #09111e,inset -3px -3px 7px #263b5d}
+[data-testid="stFileUploaderDropzone"] {background:#142033;border:0;border-radius:22px;box-shadow:inset 7px 7px 14px #0a111d,inset -7px -7px 14px #223651;padding:1.5rem}
+[data-testid="stMetric"] {background:linear-gradient(145deg,#19273c,#121d2e);border:0;padding:1.15rem;border-radius:20px;box-shadow:8px 8px 18px #0a111dcc,-6px -6px 15px #263b5d66}
+.stButton>button,.stDownloadButton>button {border:0!important;border-radius:16px!important;background:linear-gradient(145deg,#1d3047,#142135)!important;color:var(--ink)!important;box-shadow:6px 6px 13px #09111e,-5px -5px 12px #263b5d!important;transition:all .18s ease}
+.stButton>button:hover,.stDownloadButton>button:hover {color:var(--mint)!important;transform:translateY(-1px)}
+.stButton>button:active,.stDownloadButton>button:active {box-shadow:inset 4px 4px 9px #09111e,inset -4px -4px 9px #263b5d!important;transform:none}
+[data-baseweb="notification"],[data-testid="stExpander"] {border:0!important;border-radius:18px!important;background:#152236!important;box-shadow:6px 6px 14px #0a111d99,-4px -4px 12px #263b5d55}
+[role="radiogroup"] label {border-radius:14px;padding:.35rem .6rem;margin:.2rem 0}
+[role="radiogroup"] label:has(input:checked) {background:#1b2b42;box-shadow:inset 3px 3px 7px #0a111d,inset -3px -3px 7px #263b5d}
+hr {border-color:#263a55!important}.footer {color:#7890aa;text-align:center;padding:2.5rem 0 1rem}
 </style>
 """, unsafe_allow_html=True)
 

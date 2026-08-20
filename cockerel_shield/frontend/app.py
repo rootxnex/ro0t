@@ -20,22 +20,34 @@ st.markdown("""
 <style>
 :root {--surface:#15243a;--light:#294462;--dark:#07111f;--cyan:#38e8d0;--cyan2:#22c7b5;--ink:#f4f9ff;--muted:#b3c4d8;--danger:#ff6b81;--warning:#ffc857}
 .stApp {background:radial-gradient(circle at 85% 0%,#1d3855 0,transparent 32%),linear-gradient(145deg,#0d1929,#14263b);color:var(--ink)}
+.stApp h1,.stApp h2,.stApp h3,.stApp h4,.stApp h5,.stApp h6,.stApp p,.stApp label,.stApp li,.stApp small,.stApp [data-testid="stCaptionContainer"] {color:var(--ink)!important}
+.stApp [data-testid="stCaptionContainer"],.stApp [data-testid="stCaptionContainer"] p {color:var(--muted)!important}
 [data-testid="stSidebar"] {background:#101e31;border-right:1px solid #29425e;box-shadow:8px 0 22px #050b1499}
+[data-testid="stSidebar"] * {color:var(--ink)}
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {color:var(--muted)!important}
 .block-container {max-width:1180px;padding-top:2.4rem}
 .hero {padding:2.6rem;border:1px solid #294866;border-radius:28px;background:linear-gradient(145deg,#19304a,#0f1d30);box-shadow:14px 14px 30px #06101dcc,-10px -10px 24px #29476677;margin-bottom:2.2rem}
 .hero h1 {margin:0;color:var(--ink);font-size:clamp(2.25rem,5vw,4rem);line-height:1.05;letter-spacing:-.04em}
 .hero p {color:var(--muted);margin:.9rem 0 0;max-width:720px;font-size:1.08rem;line-height:1.7}
 .badge {display:inline-block;color:#071b21;background:linear-gradient(135deg,var(--cyan),var(--cyan2));border-radius:999px;padding:.38rem .85rem;margin-bottom:1.1rem;font-size:.76rem;font-weight:800;letter-spacing:.08em;box-shadow:0 5px 16px #22c7b544}
 [data-testid="stFileUploaderDropzone"] {background:#101f33;border:1px solid #294866;border-radius:22px;box-shadow:inset 7px 7px 14px #07111f,inset -7px -7px 14px #27445f;padding:1.5rem}
+[data-testid="stFileUploaderDropzone"] * {color:var(--ink)!important}
+[data-testid="stFileUploaderDropzone"] small {color:var(--muted)!important}
+[data-testid="stFileUploaderDropzone"] button {background:#e8f2ff!important;color:#102036!important;border:0!important;box-shadow:none!important}
 [data-testid="stMetric"] {background:linear-gradient(145deg,#1a3049,#101e31);border:1px solid #29445f;padding:1.15rem;border-radius:20px;box-shadow:8px 8px 18px #07111fcc,-6px -6px 15px #29476655}
 .stButton>button,.stDownloadButton>button {border:1px solid #31516d!important;border-radius:16px!important;background:linear-gradient(145deg,#1b344d,#102036)!important;color:var(--ink)!important;box-shadow:6px 6px 13px #06101d,-5px -5px 12px #294766aa!important;transition:all .18s ease}
 .stButton>button:hover,.stDownloadButton>button:hover {border-color:var(--cyan)!important;color:var(--cyan)!important;transform:translateY(-1px)}
+.stButton>button:disabled,.stDownloadButton>button:disabled {background:#172a40!important;color:#8da3ba!important;border-color:#29445f!important;opacity:1!important;box-shadow:inset 3px 3px 8px #07111f!important}
+.stButton>button:disabled *,.stDownloadButton>button:disabled * {color:#8da3ba!important}
 .stButton>button:active,.stDownloadButton>button:active {box-shadow:inset 4px 4px 9px #09111e,inset -4px -4px 9px #263b5d!important;transform:none}
 [data-baseweb="notification"],[data-testid="stExpander"] {border:1px solid #29445f!important;border-radius:18px!important;background:#112137!important;box-shadow:6px 6px 14px #07111f99,-4px -4px 12px #29476644}
-[data-testid="stTextInput"] input {background:#0e1d30;color:var(--ink);border:1px solid #31516d;border-radius:14px}
+[data-testid="stTextInput"] input {background:#0e1d30;color:var(--ink)!important;border:1px solid #577b9b;border-radius:14px}
+[data-testid="stTextInput"] input::placeholder {color:#7891aa!important;opacity:1}
 [data-testid="stTextInput"] input:focus {border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan)}
 [role="radiogroup"] label {border-radius:14px;padding:.35rem .6rem;margin:.2rem 0}
-[role="radiogroup"] label:has(input:checked) {background:#1b2b42;box-shadow:inset 3px 3px 7px #0a111d,inset -3px -3px 7px #263b5d}
+[role="radiogroup"] label:has(input:checked) {background:#203957;box-shadow:inset 3px 3px 7px #0a111d,inset -3px -3px 7px #365574}
+[role="radiogroup"] label:has(input:checked) p {color:var(--cyan)!important;font-weight:700}
+[data-testid="stCheckbox"] label span,[data-testid="stCheckbox"] label p {color:var(--ink)!important}
 hr {border-color:#263a55!important}.footer {color:#7890aa;text-align:center;padding:2.5rem 0 1rem}
 </style>
 """, unsafe_allow_html=True)

@@ -32,13 +32,15 @@ st.markdown("""
 .badge {display:inline-block;color:#071b21;background:linear-gradient(135deg,var(--cyan),var(--cyan2));border-radius:999px;padding:.38rem .85rem;margin-bottom:1.1rem;font-size:.76rem;font-weight:800;letter-spacing:.08em;box-shadow:0 5px 16px #22c7b544}
 [data-testid="stFileUploaderDropzone"] {background:#101f33;border:1px solid #294866;border-radius:22px;box-shadow:inset 7px 7px 14px #07111f,inset -7px -7px 14px #27445f;padding:1.5rem}
 [data-testid="stFileUploaderDropzone"] * {color:var(--ink)!important}
-[data-testid="stFileUploaderDropzone"] small {color:var(--muted)!important}
+[data-testid="stFileUploaderDropzone"]>div {flex-wrap:wrap!important;gap:1rem!important}
+[data-testid="stFileUploaderDropzone"] small {color:var(--muted)!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.45!important}
 [data-testid="stFileUploaderDropzone"] button {background:#e8f2ff!important;color:#102036!important;border:0!important;box-shadow:none!important}
+[data-testid="stFileUploaderDropzone"] button * {color:#102036!important;font-weight:700!important}
 [data-testid="stMetric"] {background:linear-gradient(145deg,#1a3049,#101e31);border:1px solid #29445f;padding:1.15rem;border-radius:20px;box-shadow:8px 8px 18px #07111fcc,-6px -6px 15px #29476655}
 .stButton>button,.stDownloadButton>button {border:1px solid #31516d!important;border-radius:16px!important;background:linear-gradient(145deg,#1b344d,#102036)!important;color:var(--ink)!important;box-shadow:6px 6px 13px #06101d,-5px -5px 12px #294766aa!important;transition:all .18s ease}
 .stButton>button:hover,.stDownloadButton>button:hover {border-color:var(--cyan)!important;color:var(--cyan)!important;transform:translateY(-1px)}
-.stButton>button:disabled,.stDownloadButton>button:disabled {background:#172a40!important;color:#8da3ba!important;border-color:#29445f!important;opacity:1!important;box-shadow:inset 3px 3px 8px #07111f!important}
-.stButton>button:disabled *,.stDownloadButton>button:disabled * {color:#8da3ba!important}
+.stButton>button:disabled,.stDownloadButton>button:disabled {background:#1b3048!important;color:#b9c9da!important;border-color:#426581!important;opacity:1!important;box-shadow:inset 3px 3px 8px #07111f!important}
+.stButton>button:disabled *,.stDownloadButton>button:disabled * {color:#b9c9da!important}
 .stButton>button:active,.stDownloadButton>button:active {box-shadow:inset 4px 4px 9px #09111e,inset -4px -4px 9px #263b5d!important;transform:none}
 [data-baseweb="notification"],[data-testid="stExpander"] {border:1px solid #29445f!important;border-radius:18px!important;background:#112137!important;box-shadow:6px 6px 14px #07111f99,-4px -4px 12px #29476644}
 [data-testid="stTextInput"] input {background:#0e1d30;color:var(--ink)!important;border:1px solid #577b9b;border-radius:14px}

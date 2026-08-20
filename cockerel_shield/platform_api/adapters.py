@@ -38,6 +38,7 @@ class CeleryScanQueue:
                 "pull_request_number": event.pull_request_number,
                 "head_sha": event.head_sha,
                 "scan_key": event.scan_key,
+                "installation_id": event.installation_id,
             },
             task_id=event.scan_key,
         )

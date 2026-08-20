@@ -1,0 +1,1 @@
+"""Cocokerel asynchronous scan worker."""

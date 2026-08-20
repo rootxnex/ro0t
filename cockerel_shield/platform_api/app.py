@@ -30,7 +30,10 @@ def health() -> dict[str, str]:
 
 @app.post("/api/webhooks/github")
 async def github_webhook(request: Request) -> JSONResponse:
-    declared_length = int(request.headers.get("content-length", "0") or 0)
+    try:
+        declared_length = int(request.headers.get("content-length", "0") or 0)
+    except ValueError:
+        return JSONResponse({"error": "invalid_content_length"}, status_code=400)
     if declared_length > MAX_WEBHOOK_BYTES:
         return JSONResponse({"error": "payload_too_large"}, status_code=413)
     body = await request.body()

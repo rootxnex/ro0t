@@ -3,6 +3,7 @@ import unittest
 
 from github_gate.checks import completed_check_payload
 from github_gate.delivery import MemoryDeliveryStore
+from github_gate.diffs import added_lines
 from github_gate.service import GitHubWebhookService
 from github_gate.verdicts import Disposition, FindingInput, Policy, RulePolicy, Verdict, evaluate_verdict
 from github_gate.webhooks import WebhookError, parse_github_webhook, sign_payload
@@ -17,6 +18,7 @@ class WebhookTests(unittest.TestCase):
             "number": 7,
             "repository": {"id": 42},
             "pull_request": {"draft": draft, "head": {"sha": "a" * 40}},
+            "installation": {"id": 99},
         }).encode()
         headers = {
             "Content-Type": "application/json",
@@ -31,6 +33,7 @@ class WebhookTests(unittest.TestCase):
         event = parse_github_webhook(secret=self.secret, headers=headers, body=body)
         self.assertTrue(event.should_scan)
         self.assertEqual(event.scan_key, f"github:42:pr:7:sha:{'a' * 40}")
+        self.assertEqual(event.installation_id, 99)
 
     def test_rejects_invalid_signature(self):
         body, headers = self.request(signature=False)
@@ -77,6 +80,27 @@ class VerdictTests(unittest.TestCase):
         result = evaluate_verdict([self.finding("b", "private-key")], self.policy, excepted_fingerprints={"b"})
         self.assertEqual(result.verdict, Verdict.SAFE)
         self.assertEqual(result.ignored_fingerprints, ("b",))
+
+
+class DiffTests(unittest.TestCase):
+    def test_maps_added_lines_to_destination_numbers(self):
+        patch = """@@ -8,3 +8,4 @@ def run():
+ context()
+-old_value = 1
++new_value = eval(user_input)
++audit(new_value)
+ return new_value
+"""
+        lines = added_lines("app.py", patch)
+        self.assertEqual([(line.line, line.text) for line in lines], [
+            (9, "new_value = eval(user_input)"),
+            (10, "audit(new_value)"),
+        ])
+
+    def test_enforces_changed_line_limit(self):
+        patch = "@@ -0,0 +1,3 @@\n+a\n+b\n+c"
+        with self.assertRaises(ValueError):
+            added_lines("app.py", patch, max_lines=2)
 
 
 class WebhookServiceTests(WebhookTests):

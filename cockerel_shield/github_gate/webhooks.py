@@ -25,6 +25,7 @@ class GitHubWebhook:
     repository_id: int | None
     pull_request_number: int | None
     head_sha: str | None
+    installation_id: int | None
 
     @property
     def scan_key(self) -> str | None:
@@ -75,6 +76,7 @@ def parse_github_webhook(
     repository_id = _positive_int(repository.get("id"))
     pr_number = _positive_int(payload.get("number"))
     head_sha = str((pull_request.get("head") or {}).get("sha", "")) or None
+    installation_id = _positive_int((payload.get("installation") or {}).get("id"))
     is_draft = bool(pull_request.get("draft", False))
     should_scan = (
         event == "pull_request"
@@ -82,6 +84,7 @@ def parse_github_webhook(
         and repository_id is not None
         and pr_number is not None
         and _valid_sha(head_sha)
+        and installation_id is not None
         and (not is_draft or action == "ready_for_review")
     )
     return GitHubWebhook(
@@ -93,6 +96,7 @@ def parse_github_webhook(
         repository_id=repository_id,
         pull_request_number=pr_number,
         head_sha=head_sha,
+        installation_id=installation_id,
     )
 
 

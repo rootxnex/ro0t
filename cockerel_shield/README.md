@@ -1,4 +1,53 @@
-# ��️ Cockerel Shield - AI Cyber Defense
+# Cockerel Shield
+
+Evidence-first code security for developers. The production-oriented MVP is a
+deterministic local repository scanner with a focused Streamlit interface.
+
+The hosted product is now a focused Streamlit application backed by the same
+deterministic scanner. It has no paid API, database, or separate backend.
+
+## Free web deployment
+
+Deploy on Streamlit Community Cloud:
+
+1. Push this repository to GitHub.
+2. In Streamlit Community Cloud, create an app from the repository.
+3. Set the main file path to `cockerel_shield/frontend/app.py`.
+4. Deploy. No secrets or environment variables are required.
+
+For a local preview:
+
+```bash
+cd cockerel_shield
+python3 -m pip install -r requirements.txt
+bash run.sh
+```
+
+The free host may sleep while inactive. Uploaded files are processed in a
+temporary directory and scan history exists only in the browser session.
+
+## Local scanner quick start
+
+Python 3.10+ is required. The scanner has no third-party runtime dependencies.
+
+```bash
+cd cockerel_shield
+python3 -m cshield scan .
+python3 -m cshield scan . --format json --output report.json
+python3 -m cshield scan . --fail-on high
+```
+
+Exit codes are `0` for a successful scan/passing policy, `1` when the `--fail-on` threshold is reached, and `2` for invalid input. Repository files are never executed. Symlinks, common dependency/build directories, binary files, and files over 1 MB are skipped.
+
+Run tests with `python3 -m unittest discover -s tests -v`.
+
+See [AUDIT.md](AUDIT.md), [ARCHITECTURE.md](ARCHITECTURE.md), and [THREAT_MODEL.md](THREAT_MODEL.md) for the assessment, decisions, and security boundaries.
+
+## Archived prototype notes
+
+The content below describes the retired UI prototype and is retained for migration context. Those generated threat/network/bounty features are not part of the deployable product.
+
+# Legacy: AI Cyber Defense Dashboard
 
 A modern, interactive cybersecurity dashboard built with Streamlit and FastAPI, featuring AI-powered threat detection, vulnerability scanning, and comprehensive security monitoring.
 
@@ -229,4 +278,4 @@ For support and questions:
 
 ---
 
-**🛡️ Cockerel Shield - Protecting your digital assets with AI-powered cybersecurity** 
+**🛡️ Cockerel Shield - Protecting your digital assets with AI-powered cybersecurity**

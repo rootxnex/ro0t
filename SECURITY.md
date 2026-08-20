@@ -1,21 +1,15 @@
 # Security Policy
 
-## Supported Versions
+## Supported versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Only the latest commit on the default branch is currently supported. Cockerel Shield is pre-release software and must not be treated as a substitute for security review.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+## Reporting a vulnerability
 
-## Reporting a Vulnerability
+Please use GitHub's private vulnerability-reporting feature for this repository. Do not include live credentials, personal data, or exploit traffic against systems you do not own. Include the affected revision, reproduction steps, impact, and any suggested mitigation.
 
-Use this section to tell people how to report a vulnerability.
+Maintainers should acknowledge a report within seven days, provide a status update within fourteen days, and coordinate disclosure after a fix is available. Please do not open a public issue for an unpatched vulnerability.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+## Scope and safe testing
+
+Testing is authorized only against code and systems you own or have explicit permission to assess. The local scanner is designed to read repository content without executing it. See `cockerel_shield/THREAT_MODEL.md` for current trust boundaries and limitations.

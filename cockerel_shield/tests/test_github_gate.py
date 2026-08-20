@@ -3,6 +3,7 @@ import unittest
 
 from github_gate.checks import completed_check_payload
 from github_gate.delivery import MemoryDeliveryStore
+from github_gate.service import GitHubWebhookService
 from github_gate.verdicts import Disposition, FindingInput, Policy, RulePolicy, Verdict, evaluate_verdict
 from github_gate.webhooks import WebhookError, parse_github_webhook, sign_payload
 
@@ -76,6 +77,28 @@ class VerdictTests(unittest.TestCase):
         result = evaluate_verdict([self.finding("b", "private-key")], self.policy, excepted_fingerprints={"b"})
         self.assertEqual(result.verdict, Verdict.SAFE)
         self.assertEqual(result.ignored_fingerprints, ("b",))
+
+
+class WebhookServiceTests(WebhookTests):
+    class Queue:
+        def __init__(self):
+            self.events = []
+
+        def enqueue(self, event):
+            self.events.append(event)
+            return event.scan_key
+
+    def test_accepts_once_and_queues_eligible_event(self):
+        body, headers = self.request()
+        queue = self.Queue()
+        service = GitHubWebhookService(secret=self.secret, deliveries=MemoryDeliveryStore(), queue=queue)
+        first = service.accept(headers, body)
+        second = service.accept(headers, body)
+        self.assertTrue(first.scan_queued)
+        self.assertFalse(first.duplicate)
+        self.assertTrue(second.duplicate)
+        self.assertFalse(second.scan_queued)
+        self.assertEqual(len(queue.events), 1)
 
 
 if __name__ == "__main__":

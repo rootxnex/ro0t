@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Cockerel Shield Startup Script
-echo "🛡️ Starting Cockerel Shield Cybersecurity Scanner..."
+# Cocokerel Shield Startup Script
+echo "🛡️ Starting Cocokerel Shield Cybersecurity Scanner..."
 
 # Check if Python is installed
 if ! command -v python3 &> /dev/null; then
@@ -64,7 +64,7 @@ sleep 3  # Wait for backend to start
 start_frontend
 
 echo ""
-echo "🎉 Cockerel Shield is now running!"
+echo "🎉 Cocokerel Shield is now running!"
 echo "📊 Frontend: http://localhost:8501"
 echo "🔧 Backend API: http://localhost:8000"
 echo "📚 API Docs: http://localhost:8000/docs"

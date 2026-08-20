@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Test script for Cockerel Shield
+Test script for Cocokerel Shield
 Verifies that all components are working correctly
 """
 
@@ -72,7 +72,7 @@ def test_frontend():
 
 def main():
     """Main test function"""
-    print("🛡️ Cockerel Shield - Component Test")
+    print("🛡️ Cocokerel Shield - Component Test")
     print("=" * 40)
     
     # Wait a moment for services to start
@@ -84,7 +84,7 @@ def main():
     
     print("\n" + "=" * 40)
     if backend_ok and frontend_ok:
-        print("🎉 All tests passed! Cockerel Shield is working correctly.")
+        print("🎉 All tests passed! Cocokerel Shield is working correctly.")
         print("\n📊 Access your application:")
         print("   Frontend: http://localhost:8501")
         print("   Backend API: http://localhost:8000")

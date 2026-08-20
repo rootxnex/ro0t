@@ -2,7 +2,7 @@
 
 ## Trust boundaries
 
-The user selects a repository. Cockerel Shield reads that untrusted repository, invokes configured scanner adapters, normalizes their untrusted output, and writes findings to user-selected output. Future AI providers are a separate outbound trust boundary.
+The user selects a repository. Cocokerel Shield reads that untrusted repository, invokes configured scanner adapters, normalizes their untrusted output, and writes findings to user-selected output. Future AI providers are a separate outbound trust boundary.
 
 ## Principal threats and MVP controls
 

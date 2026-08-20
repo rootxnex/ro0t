@@ -1,4 +1,4 @@
-# 🛡️ Cockerel Shield - Cybersecurity Vulnerability Scanner
+# 🛡️ Cocokerel Shield - Cybersecurity Vulnerability Scanner
 
 A modern cybersecurity application that provides a user-friendly interface for scanning software files for potential vulnerabilities. Built with **Streamlit** for the frontend and **FastAPI** for the backend.
 

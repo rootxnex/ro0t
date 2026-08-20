@@ -15,23 +15,25 @@ from cshield.linkscan import LinkScanError, WebsiteReport, scan_github_repositor
 from cshield.reporting import json_report, markdown_report
 from cshield.uploads import UploadError, UploadedSource, scan_uploads
 
-st.set_page_config(page_title="Cockerel Shield", page_icon="🛡️", layout="wide")
+st.set_page_config(page_title="Cocokerel Shield", page_icon="🛡️", layout="wide")
 st.markdown("""
 <style>
-:root {--surface:#172235;--light:#22324c;--dark:#0a111d;--mint:#5eead4;--ink:#edf6ff;--muted:#9cb0c8}
-.stApp {background:linear-gradient(145deg,#111c2d,#17253a);color:var(--ink)}
-[data-testid="stSidebar"] {background:#142033;border-right:0;box-shadow:8px 0 22px #0a111d99}
+:root {--surface:#15243a;--light:#294462;--dark:#07111f;--cyan:#38e8d0;--cyan2:#22c7b5;--ink:#f4f9ff;--muted:#b3c4d8;--danger:#ff6b81;--warning:#ffc857}
+.stApp {background:radial-gradient(circle at 85% 0%,#1d3855 0,transparent 32%),linear-gradient(145deg,#0d1929,#14263b);color:var(--ink)}
+[data-testid="stSidebar"] {background:#101e31;border-right:1px solid #29425e;box-shadow:8px 0 22px #050b1499}
 .block-container {max-width:1180px;padding-top:2.4rem}
-.hero {padding:2.6rem;border:0;border-radius:28px;background:linear-gradient(145deg,#1a2940,#121d30);box-shadow:14px 14px 30px #09111ecc,-10px -10px 24px #263b5d88;margin-bottom:2.2rem}
+.hero {padding:2.6rem;border:1px solid #294866;border-radius:28px;background:linear-gradient(145deg,#19304a,#0f1d30);box-shadow:14px 14px 30px #06101dcc,-10px -10px 24px #29476677;margin-bottom:2.2rem}
 .hero h1 {margin:0;color:var(--ink);font-size:clamp(2.25rem,5vw,4rem);line-height:1.05;letter-spacing:-.04em}
 .hero p {color:var(--muted);margin:.9rem 0 0;max-width:720px;font-size:1.08rem;line-height:1.7}
-.badge {display:inline-block;color:var(--mint);background:#142538;border-radius:999px;padding:.38rem .85rem;margin-bottom:1.1rem;font-size:.76rem;font-weight:700;letter-spacing:.08em;box-shadow:inset 3px 3px 7px #09111e,inset -3px -3px 7px #263b5d}
-[data-testid="stFileUploaderDropzone"] {background:#142033;border:0;border-radius:22px;box-shadow:inset 7px 7px 14px #0a111d,inset -7px -7px 14px #223651;padding:1.5rem}
-[data-testid="stMetric"] {background:linear-gradient(145deg,#19273c,#121d2e);border:0;padding:1.15rem;border-radius:20px;box-shadow:8px 8px 18px #0a111dcc,-6px -6px 15px #263b5d66}
-.stButton>button,.stDownloadButton>button {border:0!important;border-radius:16px!important;background:linear-gradient(145deg,#1d3047,#142135)!important;color:var(--ink)!important;box-shadow:6px 6px 13px #09111e,-5px -5px 12px #263b5d!important;transition:all .18s ease}
-.stButton>button:hover,.stDownloadButton>button:hover {color:var(--mint)!important;transform:translateY(-1px)}
+.badge {display:inline-block;color:#071b21;background:linear-gradient(135deg,var(--cyan),var(--cyan2));border-radius:999px;padding:.38rem .85rem;margin-bottom:1.1rem;font-size:.76rem;font-weight:800;letter-spacing:.08em;box-shadow:0 5px 16px #22c7b544}
+[data-testid="stFileUploaderDropzone"] {background:#101f33;border:1px solid #294866;border-radius:22px;box-shadow:inset 7px 7px 14px #07111f,inset -7px -7px 14px #27445f;padding:1.5rem}
+[data-testid="stMetric"] {background:linear-gradient(145deg,#1a3049,#101e31);border:1px solid #29445f;padding:1.15rem;border-radius:20px;box-shadow:8px 8px 18px #07111fcc,-6px -6px 15px #29476655}
+.stButton>button,.stDownloadButton>button {border:1px solid #31516d!important;border-radius:16px!important;background:linear-gradient(145deg,#1b344d,#102036)!important;color:var(--ink)!important;box-shadow:6px 6px 13px #06101d,-5px -5px 12px #294766aa!important;transition:all .18s ease}
+.stButton>button:hover,.stDownloadButton>button:hover {border-color:var(--cyan)!important;color:var(--cyan)!important;transform:translateY(-1px)}
 .stButton>button:active,.stDownloadButton>button:active {box-shadow:inset 4px 4px 9px #09111e,inset -4px -4px 9px #263b5d!important;transform:none}
-[data-baseweb="notification"],[data-testid="stExpander"] {border:0!important;border-radius:18px!important;background:#152236!important;box-shadow:6px 6px 14px #0a111d99,-4px -4px 12px #263b5d55}
+[data-baseweb="notification"],[data-testid="stExpander"] {border:1px solid #29445f!important;border-radius:18px!important;background:#112137!important;box-shadow:6px 6px 14px #07111f99,-4px -4px 12px #29476644}
+[data-testid="stTextInput"] input {background:#0e1d30;color:var(--ink);border:1px solid #31516d;border-radius:14px}
+[data-testid="stTextInput"] input:focus {border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan)}
 [role="radiogroup"] label {border-radius:14px;padding:.35rem .6rem;margin:.2rem 0}
 [role="radiogroup"] label:has(input:checked) {background:#1b2b42;box-shadow:inset 3px 3px 7px #0a111d,inset -3px -3px 7px #263b5d}
 hr {border-color:#263a55!important}.footer {color:#7890aa;text-align:center;padding:2.5rem 0 1rem}
@@ -43,7 +45,7 @@ def scan_page() -> None:
     st.markdown("""
     <section class="hero"><span class="badge">FREE · LOCAL-FIRST · OPEN SOURCE</span>
     <h1>Find risky code before it ships.</h1>
-    <p>Cockerel Shield scans source files for high-signal code execution and secret patterns.
+    <p>Cocokerel Shield scans source files for high-signal code execution and secret patterns.
     Files are processed only for this scan and are never executed.</p></section>
     """, unsafe_allow_html=True)
 
@@ -127,8 +129,8 @@ def scan_page() -> None:
         column.metric(label, value)
 
     downloads = st.columns(2)
-    downloads[0].download_button("Download JSON", json_report(result), "cockerel-shield-report.json", "application/json", use_container_width=True)
-    downloads[1].download_button("Download Markdown", markdown_report(result), "cockerel-shield-report.md", "text/markdown", use_container_width=True)
+    downloads[0].download_button("Download JSON", json_report(result), "cocokerel-shield-report.json", "application/json", use_container_width=True)
+    downloads[1].download_button("Download Markdown", markdown_report(result), "cocokerel-shield-report.md", "text/markdown", use_container_width=True)
 
     if not result.findings:
         st.success("No configured rules matched. This does not guarantee the code is vulnerability-free.")
@@ -153,12 +155,12 @@ def history_page() -> None:
     for result in history:
         with st.expander(f"{result.started_at} · {result.files_scanned} files · {len(result.findings)} findings"):
             st.code(result.scan_id)
-            st.download_button("Download JSON", json_report(result), f"cockerel-shield-{result.scan_id[:8]}.json", "application/json")
+            st.download_button("Download JSON", json_report(result), f"cocokerel-shield-{result.scan_id[:8]}.json", "application/json")
 
 
 def about_page() -> None:
-    st.title("About Cockerel Shield")
-    st.write("Cockerel Shield is a deterministic, local-first source scanner. It does not use AI to invent findings, call a paid API, execute uploaded files, or retain uploads.")
+    st.title("About Cocokerel Shield")
+    st.write("Cocokerel Shield is a deterministic, local-first source scanner. It does not use AI to invent findings, call a paid API, execute uploaded files, or retain uploads.")
     st.subheader("Trust boundaries")
     st.markdown("""
     - Uploads are limited by count and size and written only to a temporary directory.
@@ -171,10 +173,10 @@ def about_page() -> None:
     st.caption("Licensed under MIT. Review the repository threat model before production use.")
 
 
-st.sidebar.title("🛡️ Cockerel Shield")
+st.sidebar.title("🛡️ Cocokerel Shield")
 page = st.sidebar.radio("Navigate", ["Scanner", "History", "About"], label_visibility="collapsed")
 st.sidebar.divider()
 st.sidebar.success("No API key or paid service required")
 st.sidebar.caption("Deterministic scanner · v0.1.0")
 {"Scanner": scan_page, "History": history_page, "About": about_page}[page]()
-st.markdown('<div class="footer">Cockerel Shield · Built for transparent security checks</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer">Cocokerel Shield · Built for transparent security checks</div>', unsafe_allow_html=True)

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🛡️ Setting up Cockerel Shield secure workspace..."
+echo "🛡️ Setting up Cocokerel Shield secure workspace..."
 
 # 1. Create project folders
 mkdir -p ~/CockerelShield/public/{frontend,backend} mkdir -p 
@@ -19,7 +19,7 @@ scan_log.json EOL
 
 # 5. Create README for folder structure
 cat <<EOL > ~/CockerelShield/README.md
-# 🛡️ Cockerel Shield – Secure Dev Structure
+# 🛡️ Cocokerel Shield – Secure Dev Structure
 
 📁 public/ – Safe code for Cursor (UI, API) 📁 private/ – Confidential 
 AI model, startup R&D 📁 data/ – Local logs, never pushed
@@ -28,7 +28,7 @@ AI model, startup R&D 📁 data/ – Local logs, never pushed
 EOL
 
 # 6. Create placeholder for R&D
-echo "## Startup R&D Notes for Cockerel Shield" > 
+echo "## Startup R&D Notes for Cocokerel Shield" >
 ~/CockerelShield/private/rnd_docs/RESEARCH.md
 
 # 7. Print next steps

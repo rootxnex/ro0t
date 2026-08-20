@@ -10,7 +10,7 @@ def json_report(result: ScanResult) -> str:
 
 
 def markdown_report(result: ScanResult) -> str:
-    lines = ["# Cockerel Shield security report", "", f"- Scan ID: `{result.scan_id}`",
+    lines = ["# Cocokerel Shield security report", "", f"- Scan ID: `{result.scan_id}`",
              f"- Target: `{result.target}`", f"- Files scanned: {result.files_scanned}",
              f"- Findings: {len(result.findings)}", ""]
     if not result.findings:

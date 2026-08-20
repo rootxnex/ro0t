@@ -9,7 +9,7 @@ import os
 
 # Page configuration
 st.set_page_config(
-    page_title="Cockerel Shield - Cybersecurity Scanner",
+    page_title="Cocokerel Shield - Cybersecurity Scanner",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -153,7 +153,7 @@ def display_vulnerability_table(vulnerabilities):
 
 def main():
     # Header
-    st.markdown('<h1 class="main-header">🛡️ Cockerel Shield</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">🛡️ Cocokerel Shield</h1>', unsafe_allow_html=True)
     st.markdown('<p class="sub-header">Advanced Cybersecurity Vulnerability Scanner</p>', unsafe_allow_html=True)
     
     # Sidebar

@@ -8,7 +8,7 @@ import random
 from datetime import datetime
 import uuid
 
-app = FastAPI(title="Cockerel Shield API", version="1.0.0")
+app = FastAPI(title="Cocokerel Shield API", version="1.0.0")
 
 # Enable CORS for Streamlit frontend
 app.add_middleware(
@@ -101,7 +101,7 @@ def save_scan_log(scan_data: dict):
 @app.get("/")
 async def root():
     return {
-        "message": "Cockerel Shield API is running", 
+        "message": "Cocokerel Shield API is running",
         "version": "1.0.0",
         "endpoints": {
             "scan": "/scan",
@@ -199,4 +199,4 @@ async def get_scan_history():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000) 
+    uvicorn.run(app, host="0.0.0.0", port=8000)

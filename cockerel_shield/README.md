@@ -1,4 +1,4 @@
-# Cockerel Shield
+# Cocokerel Shield
 
 Evidence-first code security for developers. The production-oriented MVP is a
 deterministic local repository scanner with a focused Streamlit interface.
@@ -278,4 +278,4 @@ For support and questions:
 
 ---
 
-**🛡️ Cockerel Shield - Protecting your digital assets with AI-powered cybersecurity**
+**🛡️ Cocokerel Shield - Protecting your digital assets with AI-powered cybersecurity**

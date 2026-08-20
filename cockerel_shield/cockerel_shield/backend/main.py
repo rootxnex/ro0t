@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 import uuid
 
-app = FastAPI(title="Cockerel Shield API", version="1.0.0")
+app = FastAPI(title="Cocokerel Shield API", version="1.0.0")
 
 # Enable CORS for Streamlit frontend
 app.add_middleware(
@@ -99,7 +99,7 @@ def save_scan_log(scan_data: dict):
 
 @app.get("/")
 async def root():
-    return {"message": "Cockerel Shield API is running", "version": "1.0.0"}
+    return {"message": "Cocokerel Shield API is running", "version": "1.0.0"}
 
 @app.post("/scan", response_model=ScanResponse)
 async def scan_software(request: ScanRequest):

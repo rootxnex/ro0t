@@ -128,7 +128,7 @@ def _fetch(url: str, *, method: str, max_bytes: int, redirects: int = 3):
     opener = urllib.request.build_opener(_NoRedirect())
     for _ in range(redirects + 1):
         current = _public_url(current)
-        request = urllib.request.Request(current, method=method, headers={"User-Agent": "Cockerel-Shield/0.1 passive-security-check"})
+        request = urllib.request.Request(current, method=method, headers={"User-Agent": "Cocokerel-Shield/0.1 passive-security-check"})
         try:
             response = opener.open(request, timeout=10)
         except urllib.error.HTTPError as error:

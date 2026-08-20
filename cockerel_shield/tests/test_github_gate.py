@@ -4,6 +4,7 @@ import unittest
 from github_gate.checks import completed_check_payload
 from github_gate.delivery import MemoryDeliveryStore
 from github_gate.diffs import added_lines
+from github_gate.diff_rules import scan_changed_lines
 from github_gate.service import GitHubWebhookService
 from github_gate.verdicts import Disposition, FindingInput, Policy, RulePolicy, Verdict, evaluate_verdict
 from github_gate.webhooks import WebhookError, parse_github_webhook, sign_payload
@@ -101,6 +102,13 @@ class DiffTests(unittest.TestCase):
         patch = "@@ -0,0 +1,3 @@\n+a\n+b\n+c"
         with self.assertRaises(ValueError):
             added_lines("app.py", patch, max_lines=2)
+
+    def test_scans_only_added_lines_and_preserves_github_line(self):
+        patch = "@@ -1,2 +1,2 @@\n-safe = 1\n+value = eval(user_input)"
+        findings = scan_changed_lines(added_lines("app.py", patch))
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(findings[0].rule_id, "python-eval")
+        self.assertEqual(findings[0].line, 1)
 
 
 class WebhookServiceTests(WebhookTests):

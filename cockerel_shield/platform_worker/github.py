@@ -46,7 +46,19 @@ class GitHubAppClient:
                 return files
         raise GitHubAPIError("pull request exceeds the 1,000-file limit")
 
-    def _request(self, method: str, path: str, *, token: str, expected: int = 200):
+    def create_check_run(self, *, installation_id: int, repository_id: int, payload: dict) -> int:
+        token = self.installation_token(installation_id)
+        repository = self._request("GET", f"/repositories/{repository_id}", token=token)
+        full_name = repository.get("full_name")
+        if not isinstance(full_name, str) or "/" not in full_name:
+            raise GitHubAPIError("GitHub returned invalid repository metadata")
+        response = self._request("POST", f"/repos/{full_name}/check-runs", token=token, expected=201, json=payload)
+        check_id = response.get("id")
+        if not isinstance(check_id, int):
+            raise GitHubAPIError("GitHub returned an invalid check run")
+        return check_id
+
+    def _request(self, method: str, path: str, *, token: str, expected: int = 200, json: dict | None = None):
         headers = {
             "Accept": "application/vnd.github+json",
             "Authorization": f"Bearer {token}",
@@ -54,7 +66,7 @@ class GitHubAppClient:
             "User-Agent": "Cocokerel-Shield/0.1",
         }
         try:
-            response = httpx.request(method, self._base_url + path, headers=headers, timeout=15, follow_redirects=False)
+            response = httpx.request(method, self._base_url + path, headers=headers, json=json, timeout=15, follow_redirects=False)
         except httpx.HTTPError as error:
             raise GitHubAPIError("GitHub API could not be reached") from error
         if response.status_code != expected:

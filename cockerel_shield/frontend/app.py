@@ -11,6 +11,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from cshield.models import Severity
+from cshield.linkscan import LinkScanError, WebsiteReport, scan_github_repository, scan_website
 from cshield.reporting import json_report, markdown_report
 from cshield.uploads import UploadError, UploadedSource, scan_uploads
 
@@ -69,6 +70,37 @@ def scan_page() -> None:
         Results include evidence, CWE mapping, confidence, and remediation.
         """)
         st.warning("This focused baseline is not a replacement for a full security review.")
+
+    st.divider()
+    st.subheader("Scan from a link")
+    st.caption("Public GitHub repositories receive source analysis. Other websites receive passive configuration checks only.")
+    link = st.text_input("Public GitHub repository or website URL", placeholder="https://github.com/owner/repository or https://example.com")
+    authorized = st.checkbox("I own this target or have permission to assess it.")
+    scan_link = st.button("Scan link", disabled=not (link and authorized), use_container_width=True)
+    if scan_link:
+        try:
+            with st.spinner("Running bounded security checks…"):
+                if link.lower().startswith(("https://github.com/", "https://www.github.com/")):
+                    result = scan_github_repository(link)
+                    st.session_state.latest_scan = result
+                    history = st.session_state.setdefault("scan_history", [])
+                    history.insert(0, result)
+                    del history[10:]
+                    st.session_state.pop("website_report", None)
+                else:
+                    st.session_state.website_report = scan_website(link)
+        except LinkScanError as error:
+            st.error(str(error))
+
+    website_report: WebsiteReport | None = st.session_state.get("website_report")
+    if website_report:
+        st.markdown(f"#### Passive website report · HTTP {website_report.status}")
+        st.caption(website_report.url)
+        if not website_report.checks:
+            st.success("No issues were identified by the configured passive checks.")
+        for check in website_report.checks:
+            with st.expander(f"{check.severity} · {check.title}"):
+                st.write(check.detail)
 
     if run_scan:
         try:
@@ -133,6 +165,8 @@ def about_page() -> None:
     - Filenames containing paths are rejected.
     - Findings are produced by versioned regular-expression rules.
     - Secret evidence is redacted in reports.
+    - Website checks send one passive request and never exploit or bypass controls.
+    - Link targets must resolve to public networks; local and private addresses are blocked.
     """)
     st.caption("Licensed under MIT. Review the repository threat model before production use.")
 
